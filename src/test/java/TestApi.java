@@ -78,7 +78,7 @@ public class TestApi {
         Response response = given()
                 .header("Host", "pre.sendpulse.com")
                 .header("content-type", "Application/json")
-                //.log().all()
+                //.log().all()ggg
                 .body(query)
                 .when()//.log().all()
                 .post("api/pop-ups/schema")
