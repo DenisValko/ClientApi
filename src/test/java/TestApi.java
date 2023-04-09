@@ -5,9 +5,10 @@ import static org.hamcrest.Matchers.equalTo;
 import org.junit.Test;
 
 
+
 public class TestApi {
     @Test
-    public void Tests1() {
+    public void ShowUserPlans() {
 
         RestAssured.baseURI = ConfProperties.getProperty("preprodUrl");
         String query = ConfProperties.getProperty("bodyShowUserPlans");
@@ -27,7 +28,7 @@ public class TestApi {
     }
 
     @Test
-    public void Test2(){
+    public void ShowPopups(){
 
         RestAssured.baseURI = ConfProperties.getProperty("preprodUrl");
         String query = ConfProperties.getProperty("bodyShowPopups");
@@ -40,17 +41,51 @@ public class TestApi {
                 .post("api/pop-ups/schema")
                 .then()
                 .assertThat().statusCode(200)
-                .and().body("data.showPopups.edges[0].type",
-                        equalTo(6))
+                .and().body("data.showPopups.edges[0].type",equalTo(6))
                 .and().body("data.showPopups.result.code", equalTo(200))
                 .extract()
                 .response();
     }
+
     @Test
-    public void Test3(){
-
-
-
-
+    public void ShowWidget(){
+        //String idNum  = "ce1f1047-db7b-4c4d-a891-28949df6c65d";
+        RestAssured.baseURI = ConfProperties.getProperty("preprodUrl");
+        String query = ConfProperties.getProperty("bodyShowWidget");
+        Response response = given()
+                .header("Host", "pre.sendpulse.com")
+                .header("content-type", "Application/json")
+                //.log().all()
+                .body(query)
+                .when()//.log().all()
+                .post("api/pop-ups/schema")
+                .then()
+                .assertThat().statusCode(200)
+                .and().body("data.showWidget.Widget.id", equalTo(ConfProperties.getProperty("widgetId")))
+                .and().body("data.showWidget.result.code", equalTo(200))
+                .extract()
+                .response();
     }
+    @Test
+        public void ShowProjectActionButtons(){
+
+
+        RestAssured.baseURI = ConfProperties.getProperty("preprodUrl");
+        String query = ConfProperties.getProperty("bodyShowProjectActionButtons");
+        Response response = given()
+                .header("Host", "pre.sendpulse.com")
+                .header("content-type", "Application/json")
+                //.log().all()
+                .body(query)
+                .when()//.log().all()
+                .post("api/pop-ups/schema")
+                .then()
+                .assertThat().statusCode(200)
+                .and().body("data.showWidgetActionButtons.result.code", equalTo(200))
+                .extract()
+                .response();
+    }
+
+
+
 }
