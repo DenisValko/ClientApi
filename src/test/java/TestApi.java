@@ -3,10 +3,12 @@ import io.restassured.response.Response;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
 import org.junit.Test;
-
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
 
 
 public class TestApi {
+    @Order(1)
     @Test
     public void ShowUserPlans() {
 
@@ -26,7 +28,7 @@ public class TestApi {
                 .and().body("data.showUserPlans.result.code", equalTo(200));
 
     }
-
+    @Order(2)
     @Test
     public void ShowPopups(){
 
@@ -46,7 +48,7 @@ public class TestApi {
                 .extract()
                 .response();
     }
-
+    @Order(3)
     @Test
     public void ShowWidget(){
         //String idNum  = "ce1f1047-db7b-4c4d-a891-28949df6c65d";
@@ -66,6 +68,7 @@ public class TestApi {
                 .extract()
                 .response();
     }
+    @Order(4)
     @Test
         public void ShowProjectActionButtons(){
 
